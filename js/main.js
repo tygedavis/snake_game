@@ -12,7 +12,7 @@ let snake = [
   { x: 180, y: 200 }
 ];
 
-let gameSpeed = 1900;
+let gameSpeed = 100;
 
 let ateFruit = false;
 
@@ -46,6 +46,28 @@ function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+function gameOver() {
+  if (snake[0].x === -10 || snake[0].x === canvas.width || snake[0].y === -10 || snake[0].y === canvas.height) {
+    snake = [
+      { x: 200, y: 200 },
+      { x: 190, y: 200 },
+      { x: 180, y: 200 }
+    ]
+  }
+
+  for (let i = 1; i < snake.length; i++){
+    if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
+      snake = [
+        { x: 200, y: 200 },
+        { x: 190, y: 200 },
+        { x: 180, y: 200 }
+      ];
+      dx = 10;
+      dy = 0;
+    }
+  }
+}
+
 //Snake
 function drawSnakeBody(body) {
   ctx.fillStyle = 'black';
@@ -67,6 +89,7 @@ function moveSnake() {
 
 setInterval(function onMoveSnake() {
   clearCanvas();
+  gameOver();
   eatFruit();
   drawFruit();
   moveSnake();
