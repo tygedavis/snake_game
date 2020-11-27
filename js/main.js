@@ -97,16 +97,16 @@ setInterval(function onMoveSnake() {
 }, gameSpeed);
 
 function keyDown(e) {
-  if (e.key === 'a' || e.key === 'A') {
+  if ((e.key === 'a' || e.key === 'A') && dx !== 10) {
     dy = 0;
     dx = -10;
-  } else if (e.key === 'd' || e.key === 'D') {
+  } else if ((e.key === 'd' || e.key === 'D') && dx !== -10) {
     dy = 0;
     dx = 10;
-  } else if (e.key === 'w' || e.key === 'W') {
+  } else if ((e.key === 'w' || e.key === 'W') && dy !== 10) {
     dy = -10;
     dx = 0;
-  } else if (e.key === 's' || e.key === 'S') {
+  } else if ((e.key === 's' || e.key === 'S') && dy !== -10) {
     dy = 10;
     dx = 0;
   }
