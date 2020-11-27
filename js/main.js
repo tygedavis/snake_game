@@ -90,8 +90,6 @@ window.addEventListener('keydown', keyDown);
 function drawFruit() {
   ctx.fillStyle = 'red';
   ctx.fillRect(fruit.x, fruit.y, 10, 10);
-  console.log('------->fruit.x', fruit.x);
-  console.log('------->fruit.y', fruit.y);
 }
 
 function eatFruit() {
