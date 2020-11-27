@@ -14,6 +14,8 @@ let snake = [
 
 let gameSpeed = 1900;
 
+let ateFruit = false;
+
 function getRandom10(min, max) {
   return getRandomInt(min / 10, max / 10) * 10;
 }
@@ -57,7 +59,10 @@ function drawSnake() {
 function moveSnake() {
   const head = { x: snake[0].x + dx, y: snake[0].y + dy };
   snake.unshift(head);
-  snake.pop();
+  if(!ateFruit){
+    snake.pop();
+  }
+  ateFruit = false;
 }
 
 setInterval(function onMoveSnake() {
@@ -96,5 +101,6 @@ function eatFruit() {
   if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
     fruit.x = getRandom10(0, 790)
     fruit.y = getRandom10(0, 790)
+    ateFruit = true;
   }
 }
