@@ -12,14 +12,23 @@ let snake = [
   { x: 180, y: 200 }
 ];
 
-let fruit = {
-  x: 50,
-  y: 50
+let gameSpeed = 1900;
+
+function getRandom10(min, max) {
+  return getRandomInt(min / 10, max / 10) * 10;
 }
 
-let gameSpeed = 10
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
-let dx = gameSpeed;
+let fruit = {
+  x: getRandom10(0, 790),
+  y: getRandom10(0, 790)
+}
+
+
+let dx = 10;
 let dy = 0;
 
 //Game
@@ -51,26 +60,26 @@ function moveSnake() {
   snake.pop();
 }
 
-
 setInterval(function onMoveSnake() {
   clearCanvas();
+  eatFruit();
   drawFruit();
   moveSnake();
   drawSnake();
-}, 1500);
+}, gameSpeed);
 
 function keyDown(e) {
-  if (e.key === 'a') {
+  if (e.key === 'a' || e.key === 'A') {
     dy = 0;
-    dx = -gameSpeed;
-  } else if (e.key === 'd') {
+    dx = -10;
+  } else if (e.key === 'd' || e.key === 'D') {
     dy = 0;
-    dx = gameSpeed;
-  } else if (e.key === 'w') {
-    dy = -gameSpeed;
+    dx = 10;
+  } else if (e.key === 'w' || e.key === 'W') {
+    dy = -10;
     dx = 0;
-  } else if (e.key === 's') {
-    dy = gameSpeed;
+  } else if (e.key === 's' || e.key === 'S') {
+    dy = 10;
     dx = 0;
   }
 }
@@ -81,4 +90,13 @@ window.addEventListener('keydown', keyDown);
 function drawFruit() {
   ctx.fillStyle = 'red';
   ctx.fillRect(fruit.x, fruit.y, 10, 10);
+  console.log('------->fruit.x', fruit.x);
+  console.log('------->fruit.y', fruit.y);
+}
+
+function eatFruit() {
+  if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
+    fruit.x = getRandom10(0, 790)
+    fruit.y = getRandom10(0, 790)
+  }
 }
